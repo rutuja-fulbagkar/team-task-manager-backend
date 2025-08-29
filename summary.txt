@@ -1,0 +1,38 @@
+- npm init
+- npm install express mongoose dotenv cors bcrypt jsonwebtoken multer nodemailer node-cron uuid
+- echo.>.gitignore
+- npm i nodemon -D
+
+
+project-name/
+├── config/
+│   └── db.js               # Database connection setup
+├── controllers/
+│   └── userController.js   # Controller logic for users
+│   └── authController.js   # Controller logic for authentication
+├── middlewares/
+│   └── authMiddleware.js   # Middleware for authentication
+│   └── errorHandler.js     # Centralized error handling middleware
+├── models/
+│   └── User.js             # User schema/model
+├── routes/
+│   └── userRoutes.js       # User-related routes
+│   └── authRoutes.js       # Auth-related routes
+├── services/
+│   └── emailService.js     # Email sending logic
+│   └── tokenService.js     # JWT/Token management
+├── utils/
+│   └── logger.js           # Utility for logging
+│   └── helperFunctions.js  # Reusable helper functions
+├── public/                 # Static files (images, CSS, etc.)
+├── uploads/                 # Dynamic files (images, CSS, etc.)
+├── .env                    # Environment variables
+├── .gitignore              # Files to be ignored by Git
+├── package.json            # Project metadata and dependencies
+├── server.js               # Entry point of the application
+|── env.js                  # Environment variable configuration
+
+
+owner	The project creator with full control—can add members, update, delete projects, manage tasks
+member	General project member who can view and manage tasks assigned to them or within the project, but cannot perform owner-only actions like deleting projects or adding members
+user	(If you add this) Usually a more general or limited role, possibly application-wide (not project-specific) with minimal permissions. This is not clearly defined in your project membership but used for general authentication roles (e.g., admin vs user)
