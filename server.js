@@ -16,11 +16,30 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
  
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://team-task-manager-murex.vercel.app/'
+];
+
 app.use(cors({
-  origin: 'http://localhost:5173',  
+  origin: function(origin, callback){
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,  
+  credentials: true,
 }));
+
+// app.use(cors({
+//   origin: 'http://localhost:5173',  
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true,  
+// }));
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
