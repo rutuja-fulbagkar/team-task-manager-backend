@@ -17,48 +17,24 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
  
 
-// const allowedOrigins = [
-//   'http://localhost:5173',
-//   'https://team-task-manager-murex.vercel.app'
-// ];
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://team-task-manager-murex.vercel.app'
+];
 
-// app.use(cors({
-//   origin: function(origin, callback){
-//     if(!origin) return callback(null, true);
-//     if(allowedOrigins.indexOf(origin) === -1){
-//       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-//       return callback(new Error(msg), false);
-//     }
-//     return callback(null, true);
-//   },
-//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//   credentials: true,
-// }));
 app.use(cors({
-  origin: function (origin, callback) {
-
-    // Allow requests with no origin
-    // (Postman, mobile apps, curl)
-    if (!origin) return callback(null, true);
-
-    // Allow localhost
-    if (origin.includes("localhost")) {
-      return callback(null, true);
+  origin: function(origin, callback){
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
     }
-
-    // Allow all Vercel deployments
-    if (origin.endsWith(".vercel.app")) {
-      return callback(null, true);
-    }
-
-    return callback(
-      new Error("Not allowed by CORS")
-    );
+    return callback(null, true);
   },
-
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
+
 // app.use(cors({
 //   origin: 'http://localhost:5173',  
 //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
