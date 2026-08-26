@@ -1,12 +1,18 @@
 import nodemailer from "nodemailer";
 
 // Create a transporter for sending emails
+console.log("EMAIL_USERNAME:", process.env.EMAIL_USERNAME);
+console.log(
+  "EMAIL_PASSWORD exists:",
+  process.env.EMAIL_PASSWORD ? "YES" : "NO"
+);
 const transporter = nodemailer.createTransport({
   service: "Gmail", // or any email service provider
   auth: {
     user: process.env.EMAIL_USERNAME, // Your email address
     pass: process.env.EMAIL_PASSWORD, // Your email password
   },
+  
 });
 
 // Send verification email
