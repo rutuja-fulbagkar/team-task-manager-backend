@@ -1,26 +1,11 @@
 import nodemailer from "nodemailer";
 
-console.log("EMAIL_USERNAME:", process.env.EMAIL_USERNAME);
-
-console.log(
-  "EMAIL_PASSWORD exists:",
-  process.env.EMAIL_PASSWORD ? "YES" : "NO"
-);
-
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: false,
-  requireTLS: true,
-
+  service: "Gmail", // or any email service provider
   auth: {
-    user: process.env.EMAIL_USERNAME,
-    pass: process.env.EMAIL_PASSWORD,
+    user: process.env.EMAIL_USERNAME, // Your email address
+    pass: process.env.EMAIL_PASSWORD, // Your email password
   },
-
-  connectionTimeout: 30000,
-  greetingTimeout: 30000,
-  socketTimeout: 30000,
 });
 
 transporter.verify()
