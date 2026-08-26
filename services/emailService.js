@@ -1,19 +1,36 @@
 import nodemailer from "nodemailer";
 
-// Create a transporter for sending emails
 console.log("EMAIL_USERNAME:", process.env.EMAIL_USERNAME);
+
 console.log(
   "EMAIL_PASSWORD exists:",
   process.env.EMAIL_PASSWORD ? "YES" : "NO"
 );
+
 const transporter = nodemailer.createTransport({
-  service: "Gmail", // or any email service provider
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  requireTLS: true,
+
   auth: {
-    user: process.env.EMAIL_USERNAME, // Your email address
-    pass: process.env.EMAIL_PASSWORD, // Your email password
+    user: process.env.EMAIL_USERNAME,
+    pass: process.env.EMAIL_PASSWORD,
   },
-  
+
+  connectionTimeout: 30000,
+  greetingTimeout: 30000,
+  socketTimeout: 30000,
 });
+
+transporter.verify()
+  .then(() => {
+    console.log("SMTP connection successful. Server is ready.");
+  })
+  .catch((error) => {
+    console.error("SMTP connection failed:");
+    console.error(error);
+  });
 
 // Send verification email
 export const sendVerificationEmail = async (email, otp) => {
