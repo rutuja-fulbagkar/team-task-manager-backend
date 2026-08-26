@@ -1,11 +1,21 @@
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-  service: "Gmail", // or any email service provider
+  // service: "Gmail", // or any email service provider
+  // auth: {
+  //   user: process.env.EMAIL_USERNAME, // Your email address
+  //   pass: process.env.EMAIL_PASSWORD, // Your email password
+  // },
+   host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+
   auth: {
-    user: process.env.EMAIL_USERNAME, // Your email address
-    pass: process.env.EMAIL_PASSWORD, // Your email password
+    user: process.env.EMAIL_USERNAME,
+    pass: process.env.EMAIL_PASSWORD,
   },
+
+  connectionTimeout: 60000,
 });
 
 transporter.verify()
